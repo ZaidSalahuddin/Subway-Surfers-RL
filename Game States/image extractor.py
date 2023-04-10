@@ -8,7 +8,7 @@ while True:
     now = datetime.datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
 
     #path to store the screenshots
-    path = r"C:\Users\Zaid Salahuddin\Documents\Snek Schizms\Subway Surfers RL\Game States\screenshots\\"
+    path = r"screenshots"
 
     #takes the path and now to name the screenshot
     filename = path + now + '.png'

@@ -2,7 +2,7 @@ import os
 from os import listdir
 import cv2
 
-directory = r"C:\Users\Zaid Salahuddin\Documents\Snek Schizms\Subway Surfers RL\Game States\screenshots"
+directory = r"screenshots"
 
 # get the path/directory
 for images in os.listdir(directory):
