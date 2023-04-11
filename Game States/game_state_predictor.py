@@ -16,4 +16,14 @@ model.add(Dense(5,activation='softmax'))
 
 model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 
-def predict_state():
+model.load_weights(r'path to file')
+
+#function to predict the state
+def predict_state(input):
+    image = cv2.resize(input,(32,60)) # resize value could either be (65,120), (32,60) or (22,40). idk if latter gives up too much detail, third is too little detail
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = image/255
+    prediction = model.predict(image)
+    prediction = np.argmax(prediction, axis=1)
+    
+    return prediction
