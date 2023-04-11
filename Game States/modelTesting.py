@@ -1,12 +1,10 @@
 import pyautogui
 import numpy as np
 import cv2
-
-from tensorflow.keras.utils import to_categorical
+import time 
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
-from tensorflow.keras.callbacks import EarlyStopping
 
 #set bounding box for screenshots
 bbox = 620,0,650,1200
@@ -38,7 +36,7 @@ model32 = make_model(32)
 model32.load_weights(r'models\model32.data-00000-of-00001')
 
 model128 = make_model(128)
-model128.load_weights(r'Game States\models\model128.data-00000-of-00001')
+model128.load_weights(r'models\model128.data-00000-of-00001')
 
 #function to predict from model
 def model_predict(model,input):
@@ -51,10 +49,20 @@ def image_process(image):
     image = cv2.resize(image,(32,60)) # resize value could either be (65,120), (32,60) or (22,40). idk if latter gives up too much detail, third is too little detail
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = image/255
+    return image
+
 #main loop
 while True:
-    # Take a screenshot
+    # Take a screenshot and process image
     image = pyautogui.screenshot(region=(bbox))
+    image = image_process(image)
 
+    #gets preditcitions
+    predict8 = model_predict(model8,image)
+    predict32 = model_predict(model32,image)
+    predict128 = model_predict(model128,image)
+
+    print("8 neurons:",predict8," 32 neurons:", predict32, " 128 neurons:", predict128)
+    
     # Wait for 1 seconds
     time.sleep(1)
