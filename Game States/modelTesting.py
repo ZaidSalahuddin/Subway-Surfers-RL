@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import time 
 
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
 
 #set bounding box for screenshots
@@ -26,11 +26,12 @@ def make_model(neurons):
 
     model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
 
-    return model
+    return model 
 
 #makes models and gives the weights
-model8 = make_model(8)
-model8.load_weights(r'models\model8.data-00000-of-00001')
+model8 = load_model(r"C:\Users\Zaid Salahuddin\Documents\Snek Schizms\Subway-Surfers-RL\Game States\models\model8")
+#model8 = make_model(8)
+#model8.load_weights(r'C:\Users\Zaid Salahuddin\Documents\Snek Schizms\Subway-Surfers-RL\Game States\models\model8.data-00000-of-00001')
 
 model32 = make_model(32)
 model32.load_weights(r'models\model32.data-00000-of-00001')
